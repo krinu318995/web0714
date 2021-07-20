@@ -77,7 +77,7 @@ public class Day04_3 {
 						System.out.println("결제 하시겠습니까? 예[1]\t아니요[2]");
 						int confirm = scanner.nextInt();
 						if (confirm == 1) {
-							System.out.println("금액 투여 ㅡ");
+							System.out.println("금액 투여 ");
 						}
 
 					} else {
