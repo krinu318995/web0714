@@ -20,15 +20,16 @@ public class Day05_02_5 {
 
 		int line = scanner.nextInt();
 		for (int i = 1; i <= line; i++) {
+			System.out.print(i+ " ");
 			for(int j = 1; j<=line ; j++) {
 				if(i==j) {
-					System.out.print("*");
+					System.out.print(j);
 				}
 				else if((i+j) == (line+1)) {
-					System.out.print("*");
+					System.out.print(i+j);
 				}
 				else {
-					System.out.print(" ");
+					System.out.print("!");
 					
 				}
 			}System.out.println();
