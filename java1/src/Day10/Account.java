@@ -87,7 +87,7 @@ public class Account {
 			return;
 		}
 		
-		Day10_3.accounts[result].accountNumber
+		Day10_3.accounts[result].accountNumber = number;
 
 	}
 
