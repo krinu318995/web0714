@@ -11,7 +11,8 @@ public class Member {
 	private String email;
 	private int point;
 
-	// 생성자
+	static int totalNumber = 0;// 회원 고유번호, 회원 탈퇴해도 유지됨
+
 	public Member() {
 		// 빈 생성자
 	}
@@ -97,9 +98,14 @@ public class Member {
 		System.out.println("이메일");
 		String email = ConsoleProgram.scanner.next();
 
+	
+		// 아이디 중복 체크
+		// 입력한 아이디가 리스트에 존재하면 안됨
+		for(Member temp  : ConsoleProgram.memberList) {
+			temp.id.equals(id);
+			System.err.println("[알림 : 회원가입 실패] 이미 존재하는 아이디 입니다.");
+		}
 		// 유효성 검사
-		// 중복 체크
-
 		// 비밀번호 확인
 		if (!password.equals(passwordConfirm)) {
 			System.err.println("[알림 : 가입 실패] 비밀번호를 확인해주세요");
@@ -125,17 +131,18 @@ public class Member {
 			System.err.println("[알림 : 가입 실패] 아이디 형식에 맞지 않습니다.");
 			return;
 		}
-
-		int totalNumber = 0;// 회원 고유번호, 회원 탈퇴해도 유지됨
-
-		Member member = new Member(totalNumber + 1, id, passwordConfirm, name, email, 0);
-		ConsoleProgram.memberList.add(member);// 리스트 담기
-
 		try {
+			
+
+			Member member = new Member(totalNumber + 1, id, passwordConfirm, name, email, 0);
+			ConsoleProgram.memberList.add(member);// 리스트 담기
+
 			FileUtile.fileSave(0, member.getUserNumber());
 			FileUtile.fileSave(1, 0);
+			FileUtile.loadFile(1);
 		} catch (Exception e) {
 			System.err.println("파일처리 오류, 회원가입 실패");
+			e.getMessage();
 		}
 		System.out.println("회원가입 성공");
 

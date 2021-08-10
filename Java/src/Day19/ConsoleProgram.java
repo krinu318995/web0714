@@ -25,7 +25,15 @@ public class ConsoleProgram {
 	// .nextInt() : byte -> int
 	// .nextDouble() : byte -> double
 
-	public void start() {
+	 void start() {
+		 
+		try {
+			FileUtile.loadFile(1);
+		} catch (Exception e1) {
+			System.err.println("[알림 : 파일처리 오류] 관리자에게 문의 바랍니다.");
+		}
+		 
+		 
 		while (true) {
 			System.out.println("회원제 커뮤니티");
 			System.out.println("1.로그인 2.회원가입 3.아이디 찾기 4.비밀번호 찾기");
