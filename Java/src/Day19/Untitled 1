@@ -1,0 +1,14 @@
+console 회원제 게시판[댓글] -> 파일처리
+조건 :
+사용 api : 
+email, file, collection framework
+class : 회원, 게시물, 댓글, 프로그램
+모든 코드의 예외 처리
+반복적으로 사용되는 기능 -> 메서드로 작성
+mvc 파일 구조 : 
+start.class
+member
+board
+reply
+consoleProgram
+fileutil

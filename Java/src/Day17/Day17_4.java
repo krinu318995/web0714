@@ -7,8 +7,9 @@ public class Day17_4 {
 	// 해시 코드 값이 메모리 주소값 => 중복값 허용 안됨, 순서 X
 
 	// List Collection
-	// Set Collection
-	// Map : <key, value> 으로 이뤄진 entry, 멀티 제너릭
-	
+	// Set Collection : key값만 이용함, 중복 불가능
+
+	// Map : <key(set), value> 으로 이뤄진 entry, 멀티 제너릭
+	// 인덱스 없음
 
 }
