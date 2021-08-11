@@ -17,6 +17,7 @@ public class ConsoleProgram {
 
 	// 회원정보 저장할 리스트
 	static ArrayList<Member> memberList = new ArrayList<Member>();
+	static ArrayList<Board> boardList = new ArrayList<Board>();
 
 	static Scanner scanner = new Scanner(System.in);
 	// System.in -> 입력장치로부터 들어오는 byte(String 단위) -> scanner 클래스 객체에 저장
@@ -36,16 +37,20 @@ public class ConsoleProgram {
 			System.out.println("회원제 커뮤니티");
 			System.out.println("1.로그인 2.회원가입 3.아이디 찾기 4.비밀번호 찾기");
 			Member temp = new Member();
+			Board temp2 = new Board();
+			
 			try {
 				int ch = scanner.nextInt();
 
 				if (ch == 1) {
-					Member loginUser = temp.login();//로그인 성공시 객체 / 실패시 null
-					if(loginUser !=null) {
-						//로그인 성공하면 게시판 페이지로
+					Member loginUser = temp.login();// 로그인 성공시 객체 / 실패시 null
+					if (loginUser != null) {
+						// 로그인 성공하면 게시판 페이지로
 						System.out.println("로그인 성공");
-					}
-					else {
+						temp2.list(loginUser);
+						
+						loginUser=null;
+					} else {
 						System.out.println("로그인 실패");
 					}
 				}
@@ -54,10 +59,10 @@ public class ConsoleProgram {
 
 				}
 				if (ch == 3) {
-
+					temp.findId();
 				}
 				if (ch == 4) {
-
+					temp.findPassword();
 				}
 
 				if (ch > 4 || ch < 1) {

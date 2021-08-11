@@ -1,6 +1,14 @@
 package Day19;
 
-import java.io.Console;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class Member {
 
@@ -160,28 +168,86 @@ public class Member {
 				System.out.println("안녕하세요" + member.name + "님");
 
 				// 로그인된 회원의 정보를 넘김
-				return member;//반환타입 " 로그인된 회원 정보 객체 전달
+				return member;// 반환타입 " 로그인된 회원 정보 객체 전달
 			}
 		}
 		System.out.println("동일한 회원 정보가 없습니다.");
-		return null;//로그인 실패시 null
+		return null;// 로그인 실패시 null
 	}
 
 	// 아이디 찾기
 	// 입력받은 이름과 이메일이 동일하면 아이디 출력
 	public void findId() {
 
+		System.out.println("이름");
+		String name = ConsoleProgram.scanner.next();
+		System.out.println("이메일");
+		String email = ConsoleProgram.scanner.next();
+
+		for (Member member : ConsoleProgram.memberList) {
+			if (member.name.equals(name) && member.email.equals(email)) {
+				System.out.println("아이디 " + member.id);
+				return;
+			} else {
+				System.out.println("일치하는 정보가 없습니다.");
+				return;
+			}
+		}
 	}
 
 	// 비밀번호 찾기
 	// 입력받은 아이디와 이메일이 동일한 경우 이메일로 임시 비밀번호 전송
 	public void findPassword() {
+		System.out.println("아이디");
+		String id = ConsoleProgram.scanner.next();
+		System.out.println("이메일");
+		String email = ConsoleProgram.scanner.next();
 
+		for (Member member : ConsoleProgram.memberList) {
+			if (member.id.equals(id) && member.email.equals(email)) {
+				System.out.println("임시 비밀번호를 이메일로 전송했습니다.");
+				sendEmail(email, 1, password);// type 1 : 비밀번호 찾기
+				return;
+			}
+		}
+		System.out.println("일치하는 정보가 없습니다. 다시 확인해주세요");
 	}
 
 	// 이메일
-	public void sendEmail() {
+	public void sendEmail(String toemail, int type, String contents) {
 
+		// 1. API 다운로드 [ activation.jar , mail.jar ]
+		// 2. 라이브러리 추가 [ javase11 => module-info ]
+		// 0.설정
+		String fromemail = "보내는사람이메일@naver.com";
+		String frompassword = "패스워드";
+		// 설정관련 map( 키 , 값 ) 컬렉션
+		Properties properties = new Properties();
+		properties.put("mail.smtp.host", "smtp.naver.com");
+		properties.put("mail.smtp.port", 587);
+		properties.put("mail.smtp.auth", true);
+		// 1. 인증
+		Session session = Session.getDefaultInstance(properties, new Authenticator() {
+			@Override // 패스워드 인증 메소드 => 재정의
+			protected PasswordAuthentication getPasswordAuthentication() {
+				// TODO Auto-generated method stub
+				return new PasswordAuthentication(fromemail, frompassword);
+			}
+		});
+		// 2. 메일보내기
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(fromemail)); // 무조건 예외처리 발생
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(toemail));
+
+			if (type == 1) {
+				message.setSubject(" java console 커뮤니티 ");
+				message.setText(" 회원님의 비밀번호 : " + contents);
+			}
+			Transport.send(message);
+		} catch (Exception e) {
+			System.out.println("[[ 메일전송 실패 ]] : 관리자에게 문의 ");
+		}
 	}
 
 }
