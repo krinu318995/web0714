@@ -1,5 +1,7 @@
 package Day19;
 
+import java.io.Console;
+
 public class Member {
 
 	// 필드
@@ -98,12 +100,13 @@ public class Member {
 		System.out.println("이메일");
 		String email = ConsoleProgram.scanner.next();
 
-	
 		// 아이디 중복 체크
 		// 입력한 아이디가 리스트에 존재하면 안됨
-		for(Member temp  : ConsoleProgram.memberList) {
-			temp.id.equals(id);
-			System.err.println("[알림 : 회원가입 실패] 이미 존재하는 아이디 입니다.");
+		for (Member temp : ConsoleProgram.memberList) {
+			if (temp.id.equals(id)) {
+				System.out.println("[[알림 : 가입실패]] : 동일한 아이디가 존재합니다. ");
+				return;
+			}
 		}
 		// 유효성 검사
 		// 비밀번호 확인
@@ -132,28 +135,46 @@ public class Member {
 			return;
 		}
 		try {
-			
+			// 회원가입 성공 : 객체 => 리스트 => 파일처리
+			FileUtil.loadFile(0);
+			Member member = new Member(totalNumber + 1, id, password, name, email, 0); // 객체
+			ConsoleProgram.memberList.add(member);// 리스트담기
 
-			Member member = new Member(totalNumber + 1, id, passwordConfirm, name, email, 0);
-			ConsoleProgram.memberList.add(member);// 리스트 담기
-
-			FileUtile.fileSave(0, member.getUserNumber());
-			FileUtile.fileSave(1, 0);
-			FileUtile.loadFile(1);
+			FileUtil.fileSave(0, member.getUserNumber());
+			FileUtil.fileSave(1, 0);
 		} catch (Exception e) {
-			System.err.println("파일처리 오류, 회원가입 실패");
-			e.getMessage();
+			System.out.println("[[파일처리 오류 ]] : 관리자에게 문의 ");
 		}
-		System.out.println("회원가입 성공");
+		System.out.println("[[ 회원가입 성공 ]] : 가입해주셔서 감사합니다");
+	}
 
+	public Member login() {
+		System.out.println("아이디");
+		String id = ConsoleProgram.scanner.next();
+
+		System.out.println("비밀번호");
+		String password = ConsoleProgram.scanner.next();
+
+		for (Member member : ConsoleProgram.memberList) {
+			if (member.id.equals(id) && member.password.equals(password)) {
+				System.out.println("안녕하세요" + member.name + "님");
+
+				// 로그인된 회원의 정보를 넘김
+				return member;//반환타입 " 로그인된 회원 정보 객체 전달
+			}
+		}
+		System.out.println("동일한 회원 정보가 없습니다.");
+		return null;//로그인 실패시 null
 	}
 
 	// 아이디 찾기
+	// 입력받은 이름과 이메일이 동일하면 아이디 출력
 	public void findId() {
 
 	}
 
 	// 비밀번호 찾기
+	// 입력받은 아이디와 이메일이 동일한 경우 이메일로 임시 비밀번호 전송
 	public void findPassword() {
 
 	}
