@@ -6,12 +6,14 @@ import java.util.Scanner;
 
 public class Board {
 
-	public static int number = 0; // 게시물 번호
+	private int number; // 게시물 번호
 	private String title;// 제목
 	private String contents;// 내용
 	private String writer;// 작성자
 	private String bdate; // 작성일
 	private int count;// 조회수
+
+	public static int totalNumber = 0;
 
 	Scanner scanner = new Scanner(System.in);
 
@@ -69,78 +71,125 @@ public class Board {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Board(int number, String writer, String title, String contents, String bdate, int count) {
-		super();
-		this.number = number;
-		this.writer = writer;
-		this.title = title;
-		this.contents = contents;
-		this.bdate = bdate;
-		this.count = count;
-	}
-
 	// 게시판 메뉴
 	public void menu() {
 
 	}
 
-	// 리스트
-	public void list(Member loginUser) {
-		while (true) {
-			System.out.println("1.게시물 등록 2.게시물 조회 3.회원 정보 4.로그아웃");
-			int ch = scanner.nextInt();
+	// 모든 게시물 출력 리스트
+	public void view() {
 
-			if (ch == 1) {
-				write(loginUser);
-				// 현재 로그인된 회원 정보
-			}
-			if (ch == 2) {
-
-			}
-			if (ch == 3) {
-
-			}
-			if (ch == 4) {
-				System.out.println("로그아웃 되었습니다.");
-				return;
-			}
-
+		for (Board board : ConsoleProgram.boardList) {
+			System.out.println(
+					board.number + "\t" + board.title + "\t" + board.writer + "\t" + board.count + "\t" + board.bdate);
 		}
 	}
 
-	public void detail() {
+	public Board(int number, String title, String contents, String writer, String bdate, int count) {
+		super();
+		this.number = number;
+		this.title = title;
+		this.contents = contents;
+		this.writer = writer;
+		this.bdate = bdate;
+		this.count = count;
+	}
+
+	public void detail(Member loginUser) {
+
+		System.out.println("게시물 번호");
+		int number = scanner.nextInt();
+		for (Board board : ConsoleProgram.boardList) {
+			board.count++;
+			if (board.number == number) {
+				System.out.println("제목\t" + board.title + "\t작성일\t" + board.bdate + "\t조회수" + board.count);
+				System.out.println("작성자\t" + board.writer);
+				System.out.println("내용\t" + board.contents);
+				System.out.println();
+				Reply reply = new Reply();
+				reply.showReply(number);
+				System.out.println("0 댓글 작성");
+				int temp = scanner.nextInt();
+
+				if (temp == 0) {
+
+					reply.writeReply(number, loginUser);
+				}
+
+				if (board.writer.equals(loginUser.getId())) {
+					// 게시물작성자 와 로그인된정보의 아이디가 동일하면
+					System.out.println("1.수정 2.삭제");
+					if (temp == 1) {
+						System.out.println(" [[해당 게시물 수정]] ");
+						scanner.nextLine(); // 문제점 : 앞전에 next()등 이 있을경우
+						System.out.print("[[ 제목 : ");
+						board.title = scanner.nextLine();
+						System.out.print("[[ 내용 : ");
+						board.contents = scanner.nextLine();
+						// 파일처리 ( 업데이트 )
+						try {
+							FileUtil.filesave(2, 0);
+						} catch (Exception e) {
+						}
+
+						System.out.println(" [[ 수정 되었습니다 ]]");
+					}
+					if (temp == 2) {
+						System.out.println(" [[해당 게시물 삭제]] ");
+						ConsoleProgram.boardList.remove(board); // 현재 게시물를 리스트에 삭제
+						// 파일처리 ( 업데이트 )
+						try {
+							FileUtil.filesave(2, 0);
+						} catch (Exception e) {
+						}
+						System.out.println(" [[ 삭제 되었습니다 ]]");
+						return; // 메소드 종료
+					}
+				}
+			}
+		}
 
 	}
 
 	// 작성
-	public void write(Member loginUser) {
-		System.out.println("제목");
-		scanner.nextLine();// 문제점 희생양
+	public void boardwrite(Member login) {
+
+		// scanner.nextLine(); 문제점
+		// scanner.nextLine(); // 문제점 보완
+		System.out.print("[[ 제목 : ");
 		String title = scanner.nextLine();
-		System.out.println("내용");
+		System.out.print("[[ 내용 : ");
 		String contents = scanner.nextLine();
+		String writer = login.getId(); // 로그인된 아이디
 
-		// 작성자
-		String writer = loginUser.getId();
-		// 작성일
+		// 1. 현재날짜/시간 클래스
 		Date date = new Date();
-		// 형식 변환 클래스
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd hh:mm");
-		String bdate = dateFormat.format(date);
-		try {
-			FileUtil.loadFile(3);
-		} catch (Exception e1) {
+		// 2.형식 변환 클래스
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd hh:mm");
+		String bdate = simpleDateFormat.format(date);
 
-			Board board = new Board(number + 1, writer, title, contents, bdate, 0);
-			ConsoleProgram.boardList.add(board);
-		}
+//		private int number; // 게시물 번호
+//		private String title;// 제목
+//		private String contents;// 내용
+//		private String writer;// 작성자
+//		private String bdate; // 작성일
+//		private int count;// 조회수
 
+		// 객체
 		try {
-			FileUtil.fileSave(2, 0);
+			FileUtil.fileload(3);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+
+		Board board = new Board(totalNumber + 1, title, contents, writer, bdate, 0);
+		ConsoleProgram.boardList.add(board);
+		// 파일처리
+		try {
+			FileUtil.filesave(3, board.getNumber());
+			FileUtil.filesave(2, 0);
+		} catch (Exception e) {
+		}
+		System.out.println("[[ 게시물 등록 완료 ]] ");
 	}
 
 	// 수정

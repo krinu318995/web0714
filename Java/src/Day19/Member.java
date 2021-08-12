@@ -144,12 +144,12 @@ public class Member {
 		}
 		try {
 			// 회원가입 성공 : 객체 => 리스트 => 파일처리
-			FileUtil.loadFile(0);
+			FileUtil.fileload(0);
 			Member member = new Member(totalNumber + 1, id, password, name, email, 0); // 객체
 			ConsoleProgram.memberList.add(member);// 리스트담기
 
-			FileUtil.fileSave(0, member.getUserNumber());
-			FileUtil.fileSave(1, 0);
+			FileUtil.filesave(0, member.getUserNumber());
+			FileUtil.filesave(1, 0);
 		} catch (Exception e) {
 			System.out.println("[[파일처리 오류 ]] : 관리자에게 문의 ");
 		}
