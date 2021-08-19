@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:controller="Controller.MainController"
+	fx:id="boader_pane" maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0"
+	prefWidth="1029.0" xmlns="http://javafx.com/javafx/16"
+	xmlns:fx="http://javafx.com/fxml/1">
+	<center>
+		<AnchorPane fx:id="cp" prefHeight="634.0" prefWidth="679.0"
+			style="-fx-background-color: #EBFBFF;" BorderPane.alignment="CENTER" />
+	</center>
+	<left>
+		<AnchorPane fx:id="lp" prefHeight="634.0" prefWidth="237.0"
+			style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+			<children>
+				<ImageView fitHeight="184.0" fitWidth="201.0"
+					layoutX="18.0" layoutY="20.0" pickOnBounds="true"
+					preserveRatio="true">
+					<image>
+						<Image url="@d814a4f070110926c9b6e49f0ba7fb87.jpg" />
+					</image>
+				</ImageView>
+				<Label fx:id="loginId" layoutX="35.0" layoutY="184.0"
+					text="User Id">
+					<font>
+						<Font name="System Bold" size="15.0" />
+					</font>
+				</Label>
+				<Label fx:id="btn_logout" layoutX="152.0" layoutY="184.0"
+					onMouseClicked="#logout" text="LogOut">
+					<font>
+						<Font name="System Bold" size="15.0" />
+					</font>
+				</Label>
+				<Label fx:id="btn_community" layoutX="35.0" layoutY="251.0"
+					onMouseClicked="#community" prefHeight="14.0" prefWidth="168.0"
+					text="Community">
+					<font>
+						<Font size="20.0" />
+					</font>
+				</Label>
+				<Label fx:id="btn_product" layoutX="35.0" layoutY="280.0"
+					onMouseClicked="#product" prefHeight="14.0" prefWidth="152.0"
+					text="Product">
+					<font>
+						<Font size="20.0" />
+					</font>
+				</Label>
+				<Label fx:id="btn_chatting" layoutX="36.0" layoutY="306.0"
+					onMouseClicked="#chatting" text="Chatting">
+					<font>
+						<Font size="20.0" />
+					</font>
+				</Label>
+				<Label fx:id="btn_info" layoutX="35.0" layoutY="433.0"
+					onMouseClicked="#info" text="Info">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</Label>
+				<Label fx:id="btn_customer_service" layoutX="35.0"
+					layoutY="471.0" onMouseClicked="#customer_service"
+					text="Customer Service">
+					<font>
+						<Font name="System Bold" size="18.0" />
+					</font>
+				</Label>
+			</children>
+		</AnchorPane>
+	</left>
+</BorderPane>

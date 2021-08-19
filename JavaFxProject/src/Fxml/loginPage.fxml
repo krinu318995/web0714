@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:controller="Controller.LoginController"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="458.0" fitWidth="792.0" layoutX="-32.0" layoutY="-56.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txt_id" layoutX="312.0" layoutY="154.0" prefHeight="37.0" prefWidth="209.0" promptText="아이디">
+         <font>
+            <Font name="Modern No. 20" size="14.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="txt_password" layoutX="312.0" layoutY="195.0" prefHeight="37.0" prefWidth="209.0" promptText="비밀번호">
+         <font>
+            <Font name="Modern No. 20" size="14.0" />
+         </font>
+      </PasswordField>
+      <Label fx:id="btn_signin" layoutX="313.0" layoutY="264.0" onMouseClicked="#signIn" style="-fx-background-color: f245132;" text="SignIn">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="btn_signup" layoutX="313.0" layoutY="289.0" onMouseClicked="#signUp" style="-fx-background-color: f245132;" text="SignUp">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="btn_findid" layoutX="313.0" layoutY="345.0" onMouseClicked="#findId" text="ForgetID" />
+      <Label fx:id="btn_findpassword" layoutX="313.0" layoutY="324.0" onMouseClicked="#findPassword" text="ForgetPassword" />
+      <Label fx:id="txt_confirm" layoutX="313.0" layoutY="232.0" text="ConfirmMessage" textFill="RED" />
+      <ImageView fx:id="loading" fitHeight="55.0" fitWidth="58.0" layoutX="389.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@loading.gif" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
