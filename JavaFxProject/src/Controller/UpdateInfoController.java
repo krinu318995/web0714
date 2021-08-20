@@ -69,7 +69,7 @@ public class UpdateInfoController implements Initializable {
 			if (member.getId().equals(loginUserId)) {
 				member.setEmail(txt_email.getText());
 				member.setPhoneNumber(txt_phone.getText());
-				if (member.getPassword().equals(password)) {
+				if (!member.getPassword().equals("")) {
 					member.setPassword(txt_password.getText());
 				}
 			}
