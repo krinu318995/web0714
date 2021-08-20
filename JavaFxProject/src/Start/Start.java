@@ -12,6 +12,9 @@ public class Start extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
+
+		FileUtil.FileLoad();
+
 		// 1. 스테이지 이름 정함
 		// 2. fxml
 		Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/loginPage.fxml"));// 현재 클래스의 패키지와 fxml파일의 패키지 경로가
@@ -34,11 +37,7 @@ public class Start extends Application {
 
 	// start method 호출
 	public static void main(String[] args) {
-		try {
-			FileUtil.FileLoad();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+
 		launch(args);
 
 	}

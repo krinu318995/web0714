@@ -1,11 +1,14 @@
 package Controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import DAO.FileUtil;
 import Domain.List;
 import Domain.Member;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
@@ -13,7 +16,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-public class SignupController {
+public class SignupController implements Initializable{
 
 	@FXML
 	private TextField txt_id;
@@ -45,37 +48,37 @@ public class SignupController {
 
 		Scanner scanner = new Scanner(System.in);
 		// 아이디 길이 4-10글자
-		if (txt_id.getText().length() >= 4 && txt_id.getText().length() <= 10) {
-			txt_confirm.setText("사용할 수 있는 아이디 입니다.");
-		} else {
-			txt_confirm.setText("유효하지 않은 아이디 입니다.");
-			return;
-		}
-		// 비밀번호와 비밀번호 확인이 서로 일치하는가
-		if (!txt_password.getText().equals(txt_password_confirm.getText())) {
-			txt_confirm.setText("입력한 비밀번호를 확인해주세요");
-		}
-		// 비밀번호 길이는 8글자 이상 15글자 이내
-		if (txt_password.getText().length() <= 7 || txt_password.getText().length() >= 15) {
-			txt_confirm.setText("비밀번호 길이는 8글자 이상 15글자 이내로 생성해주세요");
-			return;
-		}
+    	if( txt_id.getText().length() <= 3 || txt_id.getText().length() > 10  ) {
+    		txt_confirm.setText("아이디는 4~10글자이내만 가능합니다.");
+    		return;
+    	}
+    		// 2. 비밀번호와 비밀번호 확인이 사로 다른경우 실패 
+    	if( !txt_password.getText().equals( txt_password_confirm.getText() ) ) {
+    		txt_confirm.setText("패스워드가 서로 다릅니다. ");
+    		return;
+    	}
+    		// 3. 비밀번호 8~15글자이내 
+    	if( txt_password.getText().length() <= 7  || txt_password.getText().length() > 15) {
+    		txt_confirm.setText("비밀번호는 8~15글자이내만 가능합니다.");
+    		return;
+    	}
+    		// 4. 이메일 반드시 @ 포함되도록 
+    	if( !txt_email.getText().contains("@") ) {
+    		txt_confirm.setText("이메일 형식으로 입력해주세요.");
+    		return;
+    	}
+    	
 
-		// 이메일 형식 확인 (@)
-		if (!txt_email.getText().contains("@")) {
-			txt_confirm.setText("반드시 이메일 형식으로 입력해주세요");
-		}
-
-		try {
-			Integer.parseInt(txt_phone.getText());
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+//		try {
+//			Integer.parseInt(txt_phone.getText());
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 		// 전화번호 -을 제외한 11글자
-		if (txt_phone.getText().length() != 11 || txt_confirm.getText().contains("-")) {
-			txt_confirm.setText("-을 제외한 숫자 11자리를 입력해주세요.");
-			return;
-		}
+		if( txt_phone.getText().contains("-") || txt_phone.getText().length() != 11 ) {
+    		txt_confirm.setText("연락처는 -제외한 숫자 11 자리 .");
+    		return;
+    	}
 		// 객체화
 
 //		private String id;
@@ -100,5 +103,11 @@ public class SignupController {
 		System.out.println("회원가입 완료");
 		// 파일처리
 		FileUtil.FileSave();
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		txt_confirm.setText("");
+		
 	}
 }

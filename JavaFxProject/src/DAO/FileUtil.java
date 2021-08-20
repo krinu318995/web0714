@@ -9,7 +9,7 @@ import Domain.Member;
 
 public class FileUtil {
 	// 파일 경로
-	static String memberPath = "D:/Java_KNR/JavaFxProject/src/DAO/memberList.txt";
+	static String memberPath = "C:/Users/User/git/web0714/JavaFxProject/web0714/JavaFxProject/src/DAO/memberList.txt";
 
 	public static void FileSave() throws Exception {
 

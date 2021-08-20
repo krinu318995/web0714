@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="info" fx:controller="Controller.InfoController"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="790.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="366.0" layoutY="45.0" text="INFO" textFill="#0010a4">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Label layoutX="150.0" layoutY="147.0" text="포인트" textFill="#0010a4" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="350.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <Label layoutX="150.0" layoutY="193.0" text="이름" textFill="#0010a4" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <Label layoutX="150.0" layoutY="215.0" text="아이디" textFill="#0010a4" AnchorPane.topAnchor="150.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <Label layoutX="146.0" layoutY="247.0" text="이메일" textFill="#0010a4" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="250.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <Label layoutX="146.0" layoutY="280.0" text="연락처" textFill="#0010a4" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="300.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <Label fx:id="txt_id" layoutX="487.0" layoutY="139.0" text="아이디" textFill="#0010a4" AnchorPane.leftAnchor="495.0" AnchorPane.topAnchor="150.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txt_name" layoutX="492.0" layoutY="191.0" text="이름" textFill="#0010a4" AnchorPane.leftAnchor="495.0" AnchorPane.topAnchor="200.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txt_email" layoutX="483.0" layoutY="245.0" text="이메일" textFill="#0010a4" AnchorPane.leftAnchor="495.0" AnchorPane.topAnchor="250.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txt_phoneNumber" layoutX="487.0" layoutY="300.0" text="연락처" textFill="#0010a4" AnchorPane.leftAnchor="495.0" AnchorPane.topAnchor="300.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txt_point" layoutX="487.0" layoutY="350.0" text="포인트" textFill="#0010a4" AnchorPane.leftAnchor="495.0" AnchorPane.topAnchor="350.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="btn_update" layoutX="481.0" layoutY="448.0" onMouseClicked="#update" text="회원수정" textFill="#0010a4" AnchorPane.topAnchor="500.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="btn_delete" layoutX="616.0" layoutY="448.0" onMouseClicked="#delete" text="회원탈퇴" textFill="#0010a4" AnchorPane.topAnchor="500.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
