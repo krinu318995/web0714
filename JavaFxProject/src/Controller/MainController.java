@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class MainController implements Initializable {
 
@@ -72,7 +73,11 @@ public class MainController implements Initializable {
 	}
 
 	@FXML
-	void logout(MouseEvent event) {
+	void logout(MouseEvent event) { //로그아웃 클릭 -> 로그아웃 처리
+		//현재 스테이지를 닫기 -> 로그인 스테이지 열기
+		
+		//현재 스테이지 닫기 : 현재 컨트롤러 이름.getScene().getWindow().hide();
+		btn_logout.getScene().getWindow().hide();		
 
 	}
 

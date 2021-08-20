@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SignupController">
+   <children>
+      <ImageView fitHeight="458.0" fitWidth="792.0" layoutX="-32.0" layoutY="-56.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txt_id" layoutX="328.0" layoutY="48.0" prefHeight="37.0" prefWidth="209.0" promptText="아이디">
+         <font>
+            <Font name="Modern No. 20" size="14.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="txt_password" layoutX="328.0" layoutY="100.0" prefHeight="37.0" prefWidth="209.0" promptText="비밀번호">
+         <font>
+            <Font name="Modern No. 20" size="14.0" />
+         </font>
+      </PasswordField>
+      <Label fx:id="btn_signup" layoutX="401.0" layoutY="344.0" onMouseClicked="#signUp" style="-fx-background-color: f245132;" text="SignUp">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="txt_confirm" layoutX="328.0" layoutY="20.0" text="ConfirmMessage" textFill="RED" />
+      <PasswordField fx:id="txt_password_confirm" layoutX="328.0" layoutY="153.0" prefHeight="37.0" prefWidth="209.0" promptText="비밀번호 확인">
+         <font>
+            <Font name="Modern No. 20" size="14.0" />
+         </font>
+      </PasswordField>
+      <TextField fx:id="txt_name" layoutX="328.0" layoutY="203.0" prefHeight="37.0" prefWidth="209.0" promptText="이름">
+         <font>
+            <Font name="Modern No. 20" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txt_email" layoutX="328.0" layoutY="253.0" prefHeight="37.0" prefWidth="209.0" promptText="이메일">
+         <font>
+            <Font name="Modern No. 20" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txt_phone" layoutX="328.0" layoutY="301.0" prefHeight="37.0" prefWidth="209.0" promptText="연락처">
+         <font>
+            <Font name="Modern No. 20" size="14.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>
