@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="info" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="790.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UpdateInfoController">
+   <children>
+      <Label layoutX="366.0" layoutY="45.0" text="INFO" textFill="#0010a4">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Label layoutX="150.0" layoutY="193.0" text="새로운 비밀번호" textFill="#0010a4" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <Label layoutX="150.0" layoutY="215.0" text="기존 비밀번호" textFill="#0010a4" AnchorPane.topAnchor="150.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <Label layoutX="146.0" layoutY="247.0" text="이메일" textFill="#0010a4" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="250.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <Label layoutX="146.0" layoutY="280.0" text="연락처" textFill="#0010a4" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="300.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <Label fx:id="btn_update" layoutX="481.0" layoutY="448.0" onMouseClicked="#update" text="회원수정" textFill="#0010a4" AnchorPane.topAnchor="500.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txt_password" layoutX="488.0" layoutY="149.0" />
+      <TextField fx:id="txt_new" layoutX="496.0" layoutY="208.0" />
+      <TextField fx:id="txt_email" layoutX="496.0" layoutY="258.0" />
+      <TextField fx:id="txt_phone" layoutX="481.0" layoutY="308.0" />
+   </children>
+</AnchorPane>

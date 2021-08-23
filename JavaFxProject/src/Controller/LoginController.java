@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import DAO.MemberDAO;
 import Domain.List;
 import Domain.Member;
 import javafx.animation.PauseTransition;
@@ -70,38 +71,14 @@ public class LoginController implements Initializable {
 
 	@FXML
 	void signIn(MouseEvent event) {
-
+		loading.setVisible(true); // 로딩 이미지 표시
 		PauseTransition pauseTransition = new PauseTransition();
 		pauseTransition.setDuration(Duration.seconds(2));
 		pauseTransition.setOnFinished(e -> {
-			// 익명 메서드 [람다식]
-			// 인수 -> {실행 코드}
-
-			if (txt_id.getText().equals("admin") && txt_password.getText().equals("1234")) {
-				txt_confirm.setText("관리자 로그인 성공");
-				// main 페이지 실행, 로그인 화면 닫기
-
-			}
-			txt_confirm.setText("올바른 회원 정보가 아닙니다");
-		});
-
-		if (txt_id.getText().equals("")) {
-			txt_confirm.setText(" - 아이디를 입력해주세요 - ");
-			return;
-		}
-		if (txt_password.getText().equals("")) {
-			txt_confirm.setText(" - 비밀번호를 입력해주세요 - ");
-			return;
-		}
-
-		if (txt_id.getText().equals("admin") && txt_password.getText().equals("1234")) {
-			txt_confirm.setText(" - 로그인 성공 - ");
-			return;
-		}
-
-		for (Member member : List.members) {
-			if (member.getId().equals(txt_id.getText()) && member.getPassword().equals(txt_password.getText())) {
-				// main page
+			loading.setVisible(false);
+			MemberDAO memberDAO = MemberDAO.getMemberDao();
+			boolean result = memberDAO.signIn(txt_id.getText(), txt_password.getText());
+			if (result) {
 				Stage mainStage = new Stage();
 				try {
 					Parent parent = FXMLLoader.load(getClass().getResource("/FXML/Main.fxml"));
@@ -112,17 +89,44 @@ public class LoginController implements Initializable {
 					Image iconImage = new Image("file:D:/Java_KNR/JavaFxProject/src/Fxml/2083256.png");
 					mainStage.getIcons().add(iconImage);
 
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+				} catch (Exception e1) {
+
 					e1.printStackTrace();
 				}
 
 				btn_signin.getScene().getWindow().hide();
 				return;
+			}else {
+				txt_confirm.setText("일치하는 회원 정보가 존재하지 않습니다.");
 			}
-		}
-		txt_confirm.setText(" - 올바른 회원정보가 아닙니다 -");
+		});
 
+		// 익명 메서드 [람다식]
+		// 인수 -> {실행 코드}
+
+//		for (Member member : List.members) {
+//			if (member.getId().equals(txt_id.getText()) && member.getPassword().equals(txt_password.getText())) {
+//				// main page
+//				Stage mainStage = new Stage();
+//				try {
+//					Parent parent = FXMLLoader.load(getClass().getResource("/FXML/Main.fxml"));
+//					Scene scene = new Scene(parent);
+//					mainStage.setScene(scene);
+//					mainStage.setScene(scene);
+//					mainStage.show();
+//					Image iconImage = new Image("file:D:/Java_KNR/JavaFxProject/src/Fxml/2083256.png");
+//					mainStage.getIcons().add(iconImage);
+//
+//				} catch (IOException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//
+//				btn_signin.getScene().getWindow().hide();
+//				return;
+//			}
+//		}
+		pauseTransition.play(); // 정지 클래스 시작
 	}
 
 	@FXML

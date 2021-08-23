@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="chatting" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="792.0" style="-fx-background-color: #F4EEE1;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="326.0" layoutY="49.0" text="ChattingPage" AnchorPane.topAnchor="40.0">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
