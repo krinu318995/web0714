@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import DAO.FileUtil;
+import DAO.MemberDAO;
 import Domain.List;
 import Domain.Member;
 import javafx.fxml.FXML;
@@ -28,18 +29,30 @@ public class InfoController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		loginUserId = LoginController.getInstance().getLoginId();
 
-		for (Member member : List.members) {
-			if (member.getId().equals(loginUserId)) {
-				txt_id.setText(member.getId());
-				txt_name.setText(member.getName());
-				txt_email.setText(member.getEmail());
-				String phone = member.getPhoneNumber().substring(0, 3) + "-" + member.getPhoneNumber().substring(3, 7)
-						+ "-" + member.getPhoneNumber().substring(7, 11);
-				txt_phoneNumber.setText(phone);
+		MemberDAO dao = MemberDAO.getMemberDao();
 
-				txt_point.setText(member.getPoint() + "");
-			}
-		}
+		Member member = dao.getmember(loginUserId);
+
+		txt_id.setText(member.getId());
+		txt_name.setText(member.getName());
+		txt_email.setText(member.getEmail());
+		String phone = member.getPhoneNumber().substring(0, 3) + "-" + member.getPhoneNumber().substring(3, 7) + "-"
+				+ member.getPhoneNumber().substring(7, 11);
+		txt_phoneNumber.setText(phone);
+		txt_point.setText(member.getPoint() + "");
+
+//		for (Member member : List.members) {
+//			if (member.getId().equals(loginUserId)) {
+//				txt_id.setText(member.getId());
+//				txt_name.setText(member.getName());
+//				txt_email.setText(member.getEmail());
+//				String phone = member.getPhoneNumber().substring(0, 3) + "-" + member.getPhoneNumber().substring(3, 7)
+//						+ "-" + member.getPhoneNumber().substring(7, 11);
+//				txt_phoneNumber.setText(phone);
+//
+//				txt_point.setText(member.getPoint() + "");
+//			}
+		// }
 
 	}
 
@@ -76,37 +89,55 @@ public class InfoController implements Initializable {
 		Optional<ButtonType> optional = alert.showAndWait();
 
 		if (optional.get() == ButtonType.OK) {
-			for (Member member : List.members) {
-				if (member.getId().equals(loginUserId)) {
-					List.members.remove(member);
+			MemberDAO memberDAO = MemberDAO.getMemberDao();
+			boolean result = memberDAO.memberDelete(loginUserId);
 
-					// 파일처리
-					FileUtil.FileSave();
+			if (result) {
+				btn_delete.getScene().getWindow().hide();
+				Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/loginPage.fxml"));
+				Scene scene = new Scene(parent);
 
-					// 메인 스테이지 닫기
-					btn_delete.getScene().getWindow().hide();
-					Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/loginPage.fxml"));
-					// 현재 클래스의 패키지와 fxml파일의 패키지 경로가 다름
+				Stage stage = new Stage();
+				stage.setScene(scene);
 
-					// 3. scene
-					Scene scene = new Scene(parent);
-
-					Stage stage = new Stage();
-
-					stage.setScene(scene);
-
-					stage.setResizable(false);
-					stage.setTitle("member");
-					// 이미지 불러오기
-					Image image = new Image("file:D:/Java_KNR/JavaFxProject/src/Fxml/2083256.png");
-					stage.getIcons().add(image);
-
-					stage.show();
-				}
+				stage.setResizable(false);
+				stage.setTitle("member");
+				Image image = new Image("file:D:/Java_KNR/JavaFxProject/src/Fxml/2083256.png");
+				stage.getIcons().add(image);
+				stage.show();
 			}
 
 		}
 	}
+
+//	for (Member member : List.members) {
+//		if (member.getId().equals(loginUserId)) {
+//			List.members.remove(member);
+//
+//			// 파일처리
+//			FileUtil.FileSave();
+//
+//			// 메인 스테이지 닫기
+//			btn_delete.getScene().getWindow().hide();
+//			Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/loginPage.fxml"));
+//			// 현재 클래스의 패키지와 fxml파일의 패키지 경로가 다름
+//
+//			// 3. scene
+//			Scene scene = new Scene(parent);
+//
+//			Stage stage = new Stage();
+//
+//			stage.setScene(scene);
+//
+//			stage.setResizable(false);
+//			stage.setTitle("member");
+//			// 이미지 불러오기
+//			Image image = new Image("file:D:/Java_KNR/JavaFxProject/src/Fxml/2083256.png");
+//			stage.getIcons().add(image);
+//
+//			stage.show();
+//		}
+//	}
 
 	@FXML
 	void update(MouseEvent event) {

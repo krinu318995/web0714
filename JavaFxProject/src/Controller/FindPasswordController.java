@@ -3,6 +3,7 @@ package Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import DAO.MemberDAO;
 import Domain.List;
 import Domain.Member;
 import javafx.fxml.FXML;
@@ -29,15 +30,26 @@ public class FindPasswordController implements Initializable {
 
 	@FXML
 	void findPassword(MouseEvent event) {
-		for (Member member : List.members) {
-			if (member.getId().equals(txt_id.getText()) && member.getEmail().equals(txt_email.getText())) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setContentText("비밀번호 " + member.getPassword());
-				alert.showAndWait();
-				userPassword.getScene().getWindow().hide();
-				return;
-			}
+
+		MemberDAO memberDAO = MemberDAO.getMemberDao();
+		String result = memberDAO.findPassword(txt_id.getText(), txt_email.getText());
+		if (result != null) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setContentText("비밀번호 " + result);
+			alert.showAndWait();
+			userPassword.getScene().getWindow().hide();
+			return;
+
 		}
+
+		/*
+		 * for (Member member : List.members) { if
+		 * (member.getId().equals(txt_id.getText()) &&
+		 * member.getEmail().equals(txt_email.getText())) { Alert alert = new
+		 * Alert(AlertType.INFORMATION); alert.setContentText("비밀번호 " +
+		 * member.getPassword()); alert.showAndWait();
+		 * userPassword.getScene().getWindow().hide(); return; } }
+		 */
 
 		userPassword.setText("입력하신 회원 정보가 없습니다.");
 

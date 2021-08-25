@@ -1,12 +1,12 @@
 package Controller;
 
-import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 import DAO.MemberDAO;
-import Domain.List;
-import Domain.Member;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,6 +68,16 @@ public class LoginController implements Initializable {
 
 	@FXML
 	private Label btn_findid;
+	
+
+	// Connection
+	private Connection conn;// DB연결 인터페이스
+
+	private static MemberDAO memberDAO = new MemberDAO();
+	// 현재 클래스 객체
+
+	private ResultSet resultSet;// 검색 후 결과 [쿼리] 연결
+	
 
 	@FXML
 	void signIn(MouseEvent event) {
@@ -144,8 +154,6 @@ public class LoginController implements Initializable {
 	@FXML
 	void findPassword(MouseEvent event) throws Exception {
 		System.out.println("비밀번호 찾기 페이지로 이동");
-		System.out.println("아이디 찾기 페이지로 이동");
-
 		Stage stage = new Stage();
 		// fxml불러오기
 		Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/findPassword.fxml"));
@@ -157,7 +165,7 @@ public class LoginController implements Initializable {
 	@FXML
 	void findId(MouseEvent event) throws Exception {
 		System.out.println("아이디 찾기 페이지로 이동");
-
+		
 		Stage stage = new Stage();
 		// fxml불러오기
 		Parent parent = FXMLLoader.load(getClass().getResource("/Fxml/findId.fxml"));

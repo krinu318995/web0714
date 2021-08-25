@@ -1,6 +1,6 @@
 package Start;
 
-import DAO.FileUtil;
+import DAO.BoardDAO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +13,9 @@ public class Start extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 
-		FileUtil.FileLoad();
+		BoardDAO boardDAO = BoardDAO.getBoardDAO();
+		
+		//FileUtil.FileLoad();
 
 		// 1. 스테이지 이름 정함
 		// 2. fxml

@@ -3,6 +3,7 @@ package Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import DAO.MemberDAO;
 import Domain.List;
 import Domain.Member;
 import javafx.fxml.FXML;
@@ -35,15 +36,26 @@ public class FindIdController implements Initializable {
 
 	@FXML
 	void findId(MouseEvent event) {
-		for (Member member : List.members) {
-			if (member.getName().equals(txt_name.getText()) && member.getEmail().equals(txt_email.getText())) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setContentText("아이디 " + member.getId());
-				alert.showAndWait();
-				userId.getScene().getWindow().hide();
-				return;
-			}
-		}
+
+		MemberDAO memberDao = MemberDAO.getMemberDao();
+
+		String result = memberDao.findId(txt_email.getText(), txt_name.getText());
+    	if( result != null ) {
+    		userId.setText(" 해당 정보의 아이디 찾기 성공 ");
+    		Alert alert = new Alert(AlertType.INFORMATION ); 
+    		alert.setContentText(" 회원님의 아이디 : "+ result ); 
+    		alert.setHeaderText(" 아이디 찾기 성공 "); 
+    		alert.showAndWait();
+    		userId.getScene().getWindow().hide(); 
+    		return; 
+    	}
+		/*
+		 * for (Member member : List.members) { if
+		 * (member.getName().equals(txt_name.getText()) &&
+		 * member.getEmail().equals(txt_email.getText())) { Alert alert = new
+		 * Alert(AlertType.INFORMATION); alert.setContentText("아이디 " + member.getId());
+		 * alert.showAndWait(); userId.getScene().getWindow().hide(); return; } }
+		 */
 		userId.setText("해당 정보의 아이디가 존재하지 않습니다.");
 	}
 }

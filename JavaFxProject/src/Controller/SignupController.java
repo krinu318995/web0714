@@ -88,7 +88,7 @@ public class SignupController implements Initializable {
 //		private String phoneNumber;
 //		private int point;
 		Member member = new Member(txt_id.getText(), txt_password.getText(), txt_name.getText(), txt_email.getText(),
-				txt_phone.getText(), 0);
+				txt_phone.getText(), 100);
 
 		// 파일처리
 		// FileUtil.FileSave();

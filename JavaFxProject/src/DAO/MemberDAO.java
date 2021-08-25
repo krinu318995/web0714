@@ -80,6 +80,8 @@ public class MemberDAO {
 			// 4. sql 실행
 			preparedStatement.executeUpdate();
 
+			return true;
+
 		} catch (SQLException e) {
 			System.out.println("db 문제 생김");
 			e.getMessage();
@@ -104,9 +106,9 @@ public class MemberDAO {
 				// sql 결과가 존재하면
 				return true;
 			}
-			
+
 			return false;// 로그인 실패 or DB오류
-			
+
 		} catch (SQLException e) {
 			System.out.println("db 오류");
 			e.printStackTrace();
@@ -115,12 +117,109 @@ public class MemberDAO {
 
 		return false;// 로그인 실패 or DB오류
 	}
+
 	// 3. 아이디 찾기
+	public String findId(String email, String name) {
+
+		String sql = "select * from member where m_email =? and m_name=?";
+		try {
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, email);// 여기서 갖고오는 순서와 controller에서 result로 갖고오는 순서가 동일해야 함
+			preparedStatement.setString(2, name);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				return resultSet.getString(1);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
 
 	// 4. 비밀번호 찾기
+	public String findPassword(String id, String email) {
+
+		String sql = "select * from member where m_id = ? and m_email = ?";
+		try {
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, id);
+			preparedStatement.setString(2, email);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+
+				return resultSet.getString(2);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return null;
+	}
 
 	// 5. 회원정보 수정
+	public Member getmember(String id) {
+		String sql = "select * from member where m_id = ?";
+
+		try {
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, id);
+
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				Member member = new Member(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
+						resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6));
+				return member;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
 
 	// 6. 회원 탈퇴
+	public boolean memberDelete(String id) {
+
+		String sql = "delete from member where m_id=?;";
+
+		try {
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, id);
+			preparedStatement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+
+		return false;
+	}
+
+	public boolean memberUpdate(Member member) {
+		String sql = "update member set m_password = ? , m_email = ?, m_phone = ? where m_id = ?";
+
+		try {
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, member.getPassword());
+			preparedStatement.setString(2, member.getEmail());
+			preparedStatement.setString(3, member.getPhoneNumber());
+			preparedStatement.setString(4, member.getId());
+			preparedStatement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+
+	}
+
 
 }
