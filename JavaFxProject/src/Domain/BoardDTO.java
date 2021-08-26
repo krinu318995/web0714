@@ -1,7 +1,5 @@
 package Domain;
 
-import java.sql.Date;
-
 public class BoardDTO {
 	// Data Transter Object
 

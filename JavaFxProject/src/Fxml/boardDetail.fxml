@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="communityPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="790.0" style="-fx-background-color: #8CBDED;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BoardWriteController">
+<AnchorPane fx:id="communityPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="790.0" style="-fx-background-color: #8CBDED;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BoardDetailController">
 	<children>
 		<Label layoutX="308.0" layoutY="27.0" text="CommunityPage" textFill="WHITE" AnchorPane.topAnchor="40.0">
 			<font>
@@ -22,12 +22,9 @@
 			</font>
 		</TextField>
 		<Button fx:id="delete" layoutX="656.0" layoutY="82.0" mnemonicParsing="false" onAction="#delete" prefHeight="38.0" prefWidth="99.0" text="삭제" />
-		<Label layoutX="45.0" layoutY="94.0" prefHeight="14.0" prefWidth="34.0" text="writer" />
-		<Label layoutX="175.0" layoutY="94.0" prefHeight="14.0" prefWidth="34.0" text="count" />
-		<Label layoutX="308.0" layoutY="94.0" prefHeight="14.0" prefWidth="34.0" text="date : " />
-		<Label fx:id="Writer" layoutX="83.0" layoutY="94.0" prefHeight="14.0" prefWidth="34.0" text="writer" />
-		<Label fx:id="Count" layoutX="213.0" layoutY="94.0" prefHeight="14.0" prefWidth="34.0" text="count" />
-		<Label fx:id="Date" layoutX="342.0" layoutY="94.0" prefHeight="14.0" prefWidth="34.0" text="date" />
+		<Label fx:id="Writer" layoutX="45.0" layoutY="94.0" prefHeight="14.0" prefWidth="72.0" text="writer" />
+		<Label fx:id="Count" layoutX="164.0" layoutY="94.0" prefHeight="14.0" prefWidth="83.0" text="count" />
+		<Label fx:id="Date" layoutX="271.0" layoutY="94.0" prefHeight="14.0" prefWidth="105.0" text="date" />
 		<Button fx:id="list" layoutX="433.0" layoutY="82.0" mnemonicParsing="false" onAction="#list" prefHeight="38.0" prefWidth="99.0" text="목록보기" />
 	</children>
 </AnchorPane>

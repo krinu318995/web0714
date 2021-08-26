@@ -21,7 +21,12 @@ public class BoardController implements Initializable {
 
 	private static BoardDTO board;
 
+	// 프로그램이 종료할 때까지 메모리 할당
 	private static BoardController instance;
+
+	public BoardController() {
+		instance = this;
+	}
 
 	public static BoardController getInstance() {
 		return instance;
@@ -56,11 +61,13 @@ public class BoardController implements Initializable {
 
 		// 테이블의 행 클릭했을 때 이벤트
 		table_view.setOnMouseClicked((MouseEvent event) -> {
-		if(event.getButton().equals(MouseButton.PRIMARY)) {
-	
-			
-		}
-		
+			if (event.getButton().equals(MouseButton.PRIMARY)) {
+				board = table_view.getSelectionModel().getSelectedItem();
+				boardDAO.baordCount(board.getBcount() + 1, board.getBno());
+				MainController.getInstance().loadPage("boardDetail");
+
+			}
+
 		});
 
 	}
@@ -70,21 +77,6 @@ public class BoardController implements Initializable {
 
 	@FXML
 	private TableView<BoardDTO> table_view; // generic
-
-	@FXML
-	private TableColumn<?, ?> no;
-
-	@FXML
-	private TableColumn<?, ?> title;
-
-	@FXML
-	private TableColumn<?, ?> writer;
-
-	@FXML
-	private TableColumn<?, ?> date;
-
-	@FXML
-	private TableColumn<?, ?> count;
 
 	@FXML
 	private Button write;

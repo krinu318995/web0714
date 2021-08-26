@@ -89,4 +89,59 @@ public class BoardDAO {
 		return null;
 //ObservableList : tableView는 ObservableList가 반드시 필요하
 	}
+
+	public boolean boardDelete(int bno) {
+
+		String sql = "delete from board where bno = ?";
+
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, bno);
+			preparedStatement.executeLargeUpdate();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	public boolean boardUpdate(String title, String contents, int bno) {
+		String sql = "update board set btitle = ?, bcontent=? where bno =?";
+
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, title);
+			preparedStatement.setString(2, contents);
+			preparedStatement.setInt(3, bno);
+			preparedStatement.executeUpdate();
+
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+
+	public boolean baordCount(int bno, int bcount) {
+		String sql = "update board set bcount = ? where bno = ?";
+
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, bcount);
+			preparedStatement.setInt(2, bno);
+			preparedStatement.executeUpdate();
+
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
 }
