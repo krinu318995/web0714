@@ -126,7 +126,7 @@ public class BoardDAO {
 
 	}
 
-	public boolean baordCount(int bno, int bcount) {
+	public boolean baordCount(int bcount, int bno) {
 		String sql = "update board set bcount = ? where bno = ?";
 
 		try {

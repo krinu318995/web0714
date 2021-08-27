@@ -2,6 +2,7 @@ package Domain;
 
 public class BoardDTO {
 	// Data Transter Object
+	// 이동 객체
 
 	// field
 	private int bno;

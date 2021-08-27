@@ -3,6 +3,7 @@ module JavaFxProject {
 	requires javafx.fxml;
 	requires java.sql;
 	requires javafx.base;
+	requires java.desktop;
 
 	// ver 11 이상 명시 필요
 	// opens 패키지명 to 라이브러리명

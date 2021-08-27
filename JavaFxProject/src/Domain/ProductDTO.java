@@ -6,13 +6,42 @@ public class ProductDTO {
 	private String pname;
 	private String pimage;
 	private String pcontents;
+	private String pcategory;
 	private int pprice;
 	private int pstock;
 	private int pactivation;
 	private int pquantity;
 
+	// 생성자
 	public ProductDTO() {
-		// 기본 생성자
+		// TODO Auto-generated constructor stub
+	}
+
+	// all field
+	public ProductDTO(int pno, String pname, String pimage, String pcontents, String pcategory, int pprice, int pstock,
+			int pactivation, int pquantity) {
+		super();
+		this.pno = pno;
+		this.pname = pname;
+		this.pimage = pimage;
+		this.pcontents = pcontents;
+		this.pcategory = pcategory;
+		this.pprice = pprice;
+		this.pstock = pstock;
+		this.pactivation = pactivation;
+		this.pquantity = pquantity;
+	}
+
+	public ProductDTO(String pname, String pimage, String pcontents, String pcategory, int pprice, int pstock,
+			int pactivation) {
+		super();
+		this.pname = pname;
+		this.pimage = pimage;
+		this.pcontents = pcontents;
+		this.pcategory = pcategory;
+		this.pprice = pprice;
+		this.pstock = pstock;
+		this.pactivation = pactivation;
 	}
 
 	// getter, setter
@@ -46,6 +75,14 @@ public class ProductDTO {
 
 	public void setPcontents(String pcontents) {
 		this.pcontents = pcontents;
+	}
+
+	public String getPcategory() {
+		return pcategory;
+	}
+
+	public void setPcategory(String pcategory) {
+		this.pcategory = pcategory;
 	}
 
 	public int getPprice() {
